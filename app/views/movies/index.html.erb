@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Movies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movies_by_category.each do |key, value| %>
+    <tr>&nbsp;</tr>
+    <tr>&nbsp;</tr>
+
+    <th> <%= key %> <th>
+      <% value.each do |movie| %>
+        <tr>
+          <td><%= movie.title %></td>
+          <td><%= movie.rating %></td>
+          <td><%= link_to 'Show', movie, :class => "btn btn-primary"%></td>
+          <td><%= link_to 'Edit', edit_movie_path(movie), :class => "btn btn-primary" %></td>
+          <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-primary" %></td>
+        </tr>
+      <% end%>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Movie', new_movie_path, :class => "btn btn-primary" %>
