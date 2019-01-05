@@ -1,3 +1,9 @@
+<head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Movies</h1>
@@ -19,9 +25,19 @@
         <tr>
           <td><%= movie.title %></td>
           <td><%= movie.rating %></td>
-          <td><%= link_to 'Show', movie, :class => "btn btn-primary"%></td>
-          <td><%= link_to 'Edit', edit_movie_path(movie), :class => "btn btn-primary" %></td>
-          <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-primary" %></td>
+          <% if false %>
+          <td>
+            <%= form_for @rating do |rating_form| %>
+              <%= rating_form.number_field :rating, class: 'rating', 'data-size' => 'xs'%>
+              <%= rating_form.submit 'Add', class: 'btn btn-primary btn-success' %>
+            <% end %>
+          </td>
+          <% end %>
+          <% if movie.user.email == current_user.email %>
+            <td><%= link_to 'Show', movie, :class => "btn btn-primary"%></td>
+            <td><%= link_to 'Edit', edit_movie_path(movie), :class => "btn btn-primary" %></td>
+            <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-primary" %></td>
+          <% end %>
         </tr>
       <% end%>
     <% end %>
