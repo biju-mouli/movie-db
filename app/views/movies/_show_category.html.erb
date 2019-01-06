@@ -1,33 +1,9 @@
-<header>
-<h1>
-<% if current_user.nil? %>
-	Welcome to Moviedb, visitor!! 
-<% else %>
-	Welcome to Moviedb, <%=current_user.email%> !!
-<% end %>
-<%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-</h1>
-</header>
-<section>
-<h1>Movies</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movies_by_category.each do |key, value| %>
-    <tr>&nbsp;</tr>
-    <tr>&nbsp;</tr>
-
-    <th> <%= key %> <th>
-      <% value.each do |movie| %>
+      <% @movies_in_category.each do |movie| %>
         <tr>
           <td><%= movie.title %></td>
           <td><%= movie.rating %></td>
+         <% puts "************** movies/show_category"%>
+         <% puts movie.title %>
           <% if false %>
           <td>
             <%= form_for @rating do |rating_form| %>
@@ -36,6 +12,7 @@
             <% end %>
           </td>
           <% end %>
+         
           <% if !current_user.nil? %>
           	<% if movie.user.email == current_user.email %>
             	<td><%= link_to 'Show', movie, :class => "btn btn-primary"%></td>
@@ -45,8 +22,3 @@
           <% end %>
         </tr>
       <% end%>
-    <% end %>
-  </tbody>
-</table>
-   
-</section>

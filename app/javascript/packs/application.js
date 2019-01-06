@@ -6,6 +6,19 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
+//= require jquery
+//= require jquery3
+//= require tether
+//= require bootstrap-sprockets
+//= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require bootstrap
+//= require Chart.bundle
+//= require chartkick
+//= require rails-ujs
+//= require jquery_nested_form
+//= require turbolinks
+//= require_tree .
 
 import "./application.css"
 import "bootstrap/dist/css/bootstrap.css"

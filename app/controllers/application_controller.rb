@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
-	before_action :authenticate_user!
 
 	def create
   		@client = Client.new(email: params[:email], password: params[:password], created_by: current_user.email  )

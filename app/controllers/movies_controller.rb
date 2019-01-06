@@ -1,22 +1,34 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  #before_action :authenticate_user!
 
   # GET /movies
   # GET /movies.json
   def index
+
     @movies = Movie.all
+    $all_movies = @movies
 
     @categories = @movies.uniq.pluck(:category)
     @movies_by_category = Hash.new
 
     @categories.each do |category|
-      @movies_by_category[category] = Movie.where(:category => category)
-    end     
+      @movies_by_category[category] = Movie.where(:category => category).length
+    end   
+
+    respond_to do |format|
+      format.html
+      format.json { render json: UsersDatatable.new(view_context)} 
+    end  
   end
 
   # GET /movies/1
   # GET /movies/1.json
   def show
+        respond_to do |format|
+      format.js {render layout: false}
+      puts "@@@@@@@@@@@@@@ moviescontroller/show_category"
+    end
   end
 
   # GET /movies/new
@@ -68,10 +80,22 @@ class MoviesController < ApplicationController
     end
   end
 
+  def show_category
+    category_selected = params[:genre]
+    #all_movies = Movie.all
+    @movies_in_category = Movie.where(category: category_selected)
+    puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    puts category_selected
+    puts @movies_in_category.length
+  end
+
+  def login
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie = Movie.find(params[:id])     
+      @movie = Movie.find(params[:id])      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
