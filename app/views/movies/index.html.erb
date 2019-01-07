@@ -21,6 +21,9 @@
 
     <tbody>
       <th>Categories</th>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td><%= current_user.email %></td>
+
       <% @categories.each do |category| %>
         <tr><td>
           <% no_of_movies_in_category = @movies_by_category.fetch(category, nil) %>
@@ -56,14 +59,11 @@
           <td><%= movie.category %> </td>
           <td><%= movie.rating %></td>
 
-          <% if !current_user.nil? %>
             <% if movie.user.email == current_user.email %>
               <td><%= link_to 'Show', movie, :class => "btn btn-primary"%></td>
               <td><%= link_to 'Edit', edit_movie_path(movie), :class => "btn btn-primary" %></td>
               <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-primary" %></td>
             <% end %>
-            <%= link_to 'New Movie', new_movie_path, :class => "btn btn-primary" %>
-          <% end %>
         </tr>
       <% end %>
     </tbody>
@@ -71,5 +71,5 @@
 
 <br>
 
-<%= link_to 'Log in', login_path, :class => "btn btn-primary" %>
+<%= link_to 'New Movie', new_movie_path, :class => "btn btn-primary" %>
 

@@ -25,10 +25,9 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-        respond_to do |format|
-      format.js {render layout: false}
-      puts "@@@@@@@@@@@@@@ moviescontroller/show_category"
-    end
+    #respond_to do |format|
+      #format.js {render layout: false}  
+    #end
   end
 
   # GET /movies/new
